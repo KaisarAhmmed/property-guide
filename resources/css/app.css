@@ -8,3 +8,7 @@
     max-width: 1200px;
     @apply px-4 md:px-0
 }
+
+.section-heading {
+    @apply font-bold text-center text-4xl;
+}
