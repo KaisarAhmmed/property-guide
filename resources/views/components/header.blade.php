@@ -1,6 +1,8 @@
-<div class="fixed top-0 w-full py-4 px-4 md:px-12 flex justify-between items-center z-30 sticky-header">
+<div class="fixed top-0 w-full py-4 px-4 md:px-12 flex justify-between items-center z-30 sticky-header {{ request()->routeIs('home') ? '' : 'general-header' }}">
     <div class="min-w-max mr-8 md:mr-0">
-        <a href=""><h1 class="font-bold text-xl uppercase text-white">Property Guide</h1></a>
+        <a href="{{route('home')}}">
+            <h1 class="font-bold text-xl uppercase text-white">Property Guide</h1>
+        </a>
     </div>
 
     <div class="w-full absolute top-24 left-0 bg-white md:bg-transparent md:relative md:top-0 civanoglu-menu-items">
