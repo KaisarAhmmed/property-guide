@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('properties', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->unsignedBigInteger('featured_meida_id');
+            $table->string('featured_image');
             $table->unsignedBigInteger('location_id');
 
             $table->unsignedBigInteger('price');
@@ -31,10 +31,11 @@ return new class extends Migration
 
             $table->longText('description');
 
-            $table->foreign('featured_meida_id')->references('id')->on('media');
+            //$table->foreign('featured_meida_id')->references('id')->on('media');
             $table->foreign('location_id')->references('id')->on('locations');
         });
     }
+
 
     /**
      * Reverse the migrations.

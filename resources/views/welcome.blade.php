@@ -14,7 +14,7 @@
             @foreach($latest_properties as $property)
             <a href="{{route('single-property', $property->id)}}" class="md:w-1/3 w-full px-3 relative rounded-md mb-6 block">
                 <div class="shadow-lg">
-                    <div class="py-20 bg-center" style="background-image: url('/img/hero-bg.jpg')"></div>
+                    <div class="py-20 bg-center" style="background-image: url({{$property->featured_image}})"></div>
                     <div class="p-3">
                         <h2 class="leading-0 text-base">{{$property->name}}</h2>
                         <h3 class="text-2xl py-3">{{$property->price}}</h3>

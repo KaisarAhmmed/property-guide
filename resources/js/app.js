@@ -32,9 +32,9 @@ jQuery(document).ready(function($) {
     });
 
     $('.thumbnail-slider').slick({
-        slidesToShow: 3,
+        slidesToShow: 4,
         asNavFor: '.gallery-slider',
-        centerMode: true,
+        centerMode: false,
         focusOnSelect: true,
         prevArrow: '<div class="left-icon"><img src="/img/chevron-left.svg"/></div>',
         nextArrow: '<div class="right-icon"><img src="/img/chevron-right.svg"/></div>',

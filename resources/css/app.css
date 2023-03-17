@@ -141,3 +141,15 @@
 .slick-arrow.slick-hidden {
     display: none;
 }
+
+.pro_gallery {
+    height: 500px;
+}
+
+.thumbnail-slider .slick-list {
+    margin: 0 -8px;
+}
+
+.thumbnail-slider .slick-list .slick-slide {
+    margin: 0 8px;
+}
