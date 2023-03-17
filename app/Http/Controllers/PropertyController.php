@@ -11,4 +11,29 @@ class PropertyController extends Controller {
 
         return view('property.single', ['property' => $property]);
     }
+
+    public function index(Request $request) {
+        $latest_properties = Property::latest();
+
+        //dd(!empty($request->sale));
+
+        if ($request->sale != null) {
+            $latest_properties = $latest_properties->where('sale', $request->sale);
+        }
+
+        if ($request->type != null) {
+            $latest_properties = $latest_properties->Where('type', $request->type);
+        }
+
+        if (!empty($request->price)) {
+            if ($request->price == '200000') {
+                $latest_properties = $latest_properties->where('price', '>', 100000)->where('price', '<=', 150000);
+            }
+        }
+
+        $latest_properties = $latest_properties->paginate(12);
+
+
+        return view('property.index', ['latest_properties' => $latest_properties]);
+    }
 }

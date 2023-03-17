@@ -7,9 +7,9 @@
 
     <div class="w-full absolute top-24 left-0 bg-white md:bg-transparent md:relative md:top-0 civanoglu-menu-items">
         <ul class="md:flex justify-center">
-            <li><a class="block md:inline-block px-4 py-2 md:py-4 text-white" href="">Land</a></li>
-            <li><a class="block md:inline-block px-4 py-2 md:py-4 text-white" href="">{{__('Villa')}}</a></li>
-            <li><a class="block md:inline-block px-4 py-2 md:py-4 text-white" href="">Apartment</a></li>
+            <li><a class="block md:inline-block px-4 py-2 md:py-4 text-white" href="{{route('properties')}}?type=0">Land</a></li>
+            <li><a class="block md:inline-block px-4 py-2 md:py-4 text-white" href="{{route('properties')}}?type=2">{{__('Villa')}}</a></li>
+            <li><a class="block md:inline-block px-4 py-2 md:py-4 text-white" href="{{route('properties')}}?type=1">Apartment</a></li>
             <li><a class="block md:inline-block px-4 py-2 md:py-4 text-white" href="">About Us</a></li>
             <li><a class="block md:inline-block px-4 py-2 md:py-4 text-white" href="">Contact Us</a></li>
         </ul>

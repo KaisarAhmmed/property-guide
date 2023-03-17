@@ -19,8 +19,21 @@
     color: #000;
 }
 
+.sticky-header{
+    transition: 0.3s;
+}
 
-
+.sticky-header-active {
+    background: #fff;
+    border-bottom: 1px solid #999;
+}
+.sticky-header-active a,
+.sticky-header-active h1{
+    color: #000
+}
+.btn {
+    @apply bg-gray-800 text-white px-6 py-2 rounded inline-block text-center
+}
 
 /* Slider */
 .slick-slider
