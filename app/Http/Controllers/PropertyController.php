@@ -31,6 +31,14 @@ class PropertyController extends Controller {
             }
         }
 
+        if (!empty($request->bedrooms)) {
+            $latest_properties = $latest_properties->where('bedrooms', $request->bedrooms);
+        }
+
+        if (!empty($request->property_name)) {
+            $latest_properties = $latest_properties->where('name', 'LIKE', '%' . $request->property_name . '%');
+        }
+
         $latest_properties = $latest_properties->paginate(12);
 
 
