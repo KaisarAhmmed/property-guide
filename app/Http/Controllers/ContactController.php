@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ContactMail;
 use App\Models\Contact;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller {
     public function propertyInquiry(Request $request, $property_id) {
@@ -21,6 +23,11 @@ class ContactController extends Controller {
         $contact->message = $request->message . '/n This message has been sent via ' . route('single-property', $property_id) . ' website';
         $contact->save();
 
-        return redirect(route('single-property', $property_id),);
+        //send user and admin message
+        //Mail::send(new ContactMail());
+        $name = "Funny Coder";
+        Mail::to('testreceiver@gmail.com’')->send(new ContactMail($name));
+
+        return redirect(route('single-property', $property_id))->with(['message' => 'Your message has been send.']);
     }
 }
