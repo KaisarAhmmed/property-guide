@@ -166,3 +166,52 @@
 .thumbnail-slider .slick-list .slick-slide {
     margin: 0 8px;
 }
+
+.vertical-search-form > form > div {
+    display: block;
+    min-width: 100%;
+    margin-bottom: 15px;
+}
+
+.vertical-search-form > form {
+    display: block;
+}
+
+.vertical-search-form .border-gray-500 {
+    display: none;
+}
+
+.home-search label {
+    display: none;
+}
+
+.vertical-search-form label {
+    text-transform: uppercase;
+    font-size: 12px;
+    margin-bottom: 5px;
+    display: block;
+    opacity: .5;
+}
+
+.vertical-search-form select {
+    min-width: 100%;
+}
+
+.vertical-search-form > form > div > div {
+    display: block;
+    min-width: 100%;
+    margin-bottom: 15px;
+}
+
+.vertical-search-form > form > div.md\:ml-5 {
+    margin-left: 12px;
+}
+
+.vertical-search-form button {
+    margin-top: 15px;
+    min-width: 100%;
+}
+
+.vertical-search-form > form > div > div.md\:mx-3 {
+    margin-left: 0;
+}

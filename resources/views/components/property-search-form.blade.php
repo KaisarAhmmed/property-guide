@@ -15,6 +15,9 @@
             <select id="location" name="location" class="border-gray-400 mb-3 md:mb-0 md:border-0 focus:ring-0">
                 <option value="">Location</option>
 
+                @foreach($locations as $location)
+                <option {{request('location') == $location->id ? 'selected="selected"' : ''}} value="{{$location->id}}">{{$location->name}}</option>
+                @endforeach
             </select>
         </div>
 
