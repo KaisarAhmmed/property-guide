@@ -153,7 +153,7 @@
                                 Details</button>
                         </div>
                         @if(Session::get('message'))
-                        <p class="mb-6 p-3 bg-green-100 text-green-700">{{Session::get('message')}}</p>
+                        <p class="mt-6 p-3 bg-green-100 text-green-700">{{Session::get('message')}}</p>
                         @endif
                     </form>
                 </div>

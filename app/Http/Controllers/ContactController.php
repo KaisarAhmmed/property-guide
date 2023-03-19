@@ -25,8 +25,7 @@ class ContactController extends Controller {
 
         //send user and admin message
         //Mail::send(new ContactMail());
-        $name = "Funny Coder";
-        Mail::to('testreceiver@gmail.com’')->send(new ContactMail($name));
+        Mail::send(new ContactMail($contact));
 
         return redirect(route('single-property', $property_id))->with(['message' => 'Your message has been send.']);
     }
