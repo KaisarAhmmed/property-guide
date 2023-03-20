@@ -21,8 +21,8 @@
     </div>
 
     <div class="min-w-max text-3xl">
-        <a href="">🇺🇸</a>
-        <a href="">🇹🇷</a>
+        <a href="{{ LaravelLocalization::getLocalizedURL('en')}}">🇺🇸</a>
+        <a href="{{ LaravelLocalization::getLocalizedURL('tr')}}">🇹🇷</a>
     </div>
 
     <div class="min-w-max ml-10 md:hidden">
