@@ -4,16 +4,15 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
+    public function up(): void {
         Schema::create('properties', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('name_tr');
             $table->string('featured_image');
             $table->unsignedBigInteger('location_id');
 
@@ -25,11 +24,14 @@ return new class extends Migration
             $table->unsignedBigInteger('net_sqm')->nullable();
             $table->unsignedBigInteger('gross_sqm')->nullable();
             $table->longText('overview');
+            $table->longText('overview_tr');
             $table->longText('why_buy')->nullable();
+            $table->longText('why_buy_tr')->nullable();
             $table->unsignedBigInteger('pool')->nullable()->comment('0=no,1=private,2=public,3=both');
             $table->timestamps();
 
             $table->longText('description');
+            $table->longText('description_tr');
 
             //$table->foreign('featured_meida_id')->references('id')->on('media');
             $table->foreign('location_id')->references('id')->on('locations');
@@ -40,8 +42,7 @@ return new class extends Migration
     /**
      * Reverse the migrations.
      */
-    public function down(): void
-    {
+    public function down(): void {
         Schema::dropIfExists('properties');
     }
 };
