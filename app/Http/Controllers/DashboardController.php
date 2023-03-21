@@ -6,8 +6,7 @@ use App\Models\Location;
 use App\Models\Media;
 use App\Models\Property;
 use Illuminate\Http\Request;
-
-
+use Illuminate\Support\Facades\Storage;
 
 class DashboardController extends Controller {
 
@@ -28,11 +27,10 @@ class DashboardController extends Controller {
         return view('admin.property.create', ['locations' => $locations]);
     }
 
-    public function createProperty(Request $request) {
-        $request->validate([
+    public function validatePropery() {
+        return [
             'name' => 'required',
             'name_tr' => 'required',
-            'featured_image' => 'required|image',
             'location_id' => 'required',
             'price' => 'required|integer',
             'sale' => 'integer',
@@ -44,22 +42,27 @@ class DashboardController extends Controller {
             'overview_tr' => 'required',
             'description' => 'required',
             'description_tr' => 'required',
-        ]);
+        ];
+    }
 
-
-
-        $property = new Property();
+    public function saveOrUpdateProperty($property, $request) {
         $property->name = $request->name;
         $property->name_tr = $request->name_tr;
 
-        $featured_image_name = time() . '-' . $request->featured_image->getClientOriginalName();
-        $request->featured_image->storeAs('public/uploads', $featured_image_name);
+        if (!empty($request->featured_image)) {
+            $featured_image_name = time() . '-' . $request->featured_image->getClientOriginalName();
+            // store the file
+            $request->featured_image->storeAs('public/uploads', $featured_image_name);
 
-        $property->featured_image = $featured_image_name;
+            $property->featured_image = $featured_image_name;
+        }
+
         $property->location_id = $request->location_id;
         $property->price = $request->price;
         $property->sale = $request->sale;
         $property->type = $request->type;
+        $property->net_sqm = $request->net_sqm;
+        $property->gross_sqm = $request->gross_sqm;
         $property->bedrooms = $request->bedrooms;
         $property->bathrooms = $request->bathrooms;
         $property->pool = $request->pool;
@@ -72,17 +75,33 @@ class DashboardController extends Controller {
 
         $property->save();
 
-        foreach ($request->gallery_images as $image) {
-            if (!empty($image)) {
-                $gallery_image_name = time() . '-' . $image->getClientOriginalName();
-                $image->storeAs('public/uploads', $gallery_image_name);
-                $media = new Media();
-                $media->name = $gallery_image_name;
+        if ($request->gallery_images != null) {
+            foreach ($request->gallery_images as $image) {
+                if (!empty($image)) {
+                    $gallery_image_name = time() . '-' . $image->getClientOriginalName();
+                    $image->storeAs('public/uploads', $gallery_image_name);
+                    $media = new Media();
+                    $media->name = $gallery_image_name;
 
-                $media->property_id = $property->id;
-                $media->save();
+                    $media->property_id = $property->id;
+                    $media->save();
+                }
             }
         }
+    }
+
+    public function createProperty(Request $request) {
+
+        $update_validation = $this->validatePropery()[] = [
+            'featured_image' => 'required|image',
+            'gallery_images' => 'required',
+        ];
+
+        $request->validate($update_validation);
+
+        $property = new Property();
+
+        $this->saveOrUpdateProperty($property, $request);
 
         return redirect(route('dashboard-properties'))->with(['message' => 'Property is added successfully.']);
     }
@@ -92,5 +111,25 @@ class DashboardController extends Controller {
         $locations = Location::all();
 
         return view('admin.property.edit', ['property' => $property, 'locations' => $locations]);
+    }
+
+    public function deleteMedia($media_id) {
+        $media = Media::findOrFail($media_id);
+
+        Storage::delete('public/uploads/' . $media->name);
+
+        $media->delete();
+
+        return back();
+    }
+
+    public function updateProperty($property_id, Request $request) {
+        $property = Property::findOrFail($property_id);
+
+        $request->validate($this->validatePropery());
+
+        $this->saveOrUpdateProperty($property, $request);
+
+        return redirect()->back();
     }
 }
