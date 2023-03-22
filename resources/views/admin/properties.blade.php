@@ -29,8 +29,11 @@
                                 <td class="border px-4 py-2">{{$property->price}}</td>
                                 <td class="border px-4 py-2 text-center">
                                     <a href="{{route('edit-property', $property->id)}}" class="bg-blue-500 text-white px-2 py-2 text-sm rounded">Edit</a>
-                                    <a href="" class="bg-green-500 text-white px-2 py-2 text-sm rounded">View</a>
-                                    <a href="" class="bg-red-500 text-white px-2 py-2 text-sm rounded">Delete</a>
+                                    <a target="_blank" href="{{route('single-property', $property->id)}}" class="bg-green-500 text-white px-2 py-2 text-sm rounded">View</a>
+                                    <form action="{{route('delete-property', $property->id)}}" method="post" onsubmit="return confirm('Do you really want to delete this property?')" class="inline-block">
+                                        @csrf
+                                        <button type="submit" class="bg-red-500 text-white px-2 py-2 text-sm rounded">Delete</button>
+                                    </form>
                                 </td>
                             </tr>
                             @endforeach

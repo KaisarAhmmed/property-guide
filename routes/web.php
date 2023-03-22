@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\LocationController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
@@ -29,6 +30,7 @@ Route::group(['prefix' => FacadesLaravelLocalization::setLocale()], function () 
     Route::get('/properties', [PropertyController::class, 'index'])->name('properties');
     Route::get('/page/{slug}', [PageController::class, 'single'])->name('page');
     Route::post('/property-inquiry/{id}', [ContactController::class, 'propertyInquiry'])->name('property-inquiry');
+    Route::get('/location/{id}', [HomeController::class, 'singleLocation'])->name('single-location');
 });
 
 
@@ -42,7 +44,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/dashboard/create-property', [DashboardController::class, 'createProperty'])->name('create-property');
     Route::get('/dashboard/edit-property/{id}', [DashboardController::class, 'editProperty'])->name('edit-property');
     Route::post('/dashboard/delete-media/{media_id}', [DashboardController::class, 'deleteMedia'])->name('delete-media');
+    Route::post('/dashboard/delete-property/{property_id}', [DashboardController::class, 'deleteProperty'])->name('delete-property');
     Route::put('/dashboard/update-property/{property_id}', [DashboardController::class, 'updateProperty'])->name('update-property');
+
+
+    Route::resource('dashboard-location', LocationController::class);
 });
 
 require __DIR__ . '/auth.php';

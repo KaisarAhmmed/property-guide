@@ -16,4 +16,10 @@ class HomeController extends Controller {
             'locations' => $locations
         ]);
     }
+
+    public function singleLocation($id) {
+        $location = Location::findOrFail($id);
+
+        return $location->name;
+    }
 }
